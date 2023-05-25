@@ -10,7 +10,7 @@ import org.iesalandalus.programacion.alquilervehiculos.vista.Vista;
 public class MainApp {
 
 	public static void main(String[] args) {
-		Modelo modelo = new ModeloCascada(FactoriaFuenteDatos.FICHEROS);
+		Modelo modelo = new ModeloCascada(procesarArgumentosFuenteDatos(args));
 		Vista vista = procesarArgumentosVistas(args);
 		Controlador controlador = new Controlador(modelo, vista);
 		controlador.comenzar();
@@ -21,12 +21,28 @@ public class MainApp {
 		for (String argumento : args) {
 			if (argumento.equals("-vgrafica")) {
 				vista = FactoriaVista.GRAFICA.crear();
-			} else {
+			} else if (argumento.equals("-vtexto")) {
 				vista = FactoriaVista.TEXTO.crear();
 			}
 		}
 
 		return vista;
-	} 
+	}
+
+	private static FactoriaFuenteDatos procesarArgumentosFuenteDatos(String[] args) {
+		FactoriaFuenteDatos factoriaFuenteDatos = FactoriaFuenteDatos.MONGODB;
+		for (String argumento : args) {
+			if (argumento.equals("-fdficheros")) {
+				factoriaFuenteDatos = FactoriaFuenteDatos.FICHEROS;
+			} else if (argumento.equals("-fdmongodb")) {
+				factoriaFuenteDatos = FactoriaFuenteDatos.MONGODB;
+			} else if (argumento.equals("-fdmariadb")) {
+				factoriaFuenteDatos = FactoriaFuenteDatos.MARIADB;
+			}
+
+		}
+		return factoriaFuenteDatos;
+
+	}
 
 }

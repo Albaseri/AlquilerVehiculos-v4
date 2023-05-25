@@ -24,6 +24,7 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
+
 dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
@@ -35,6 +36,14 @@ dependencies {
       
     // Entrada para que el repositorio jitpack.io sepa acceder a la localización de librería entrada
     implementation 'com.github.JRJimenezReyes:entrada:1.0.3'
+    
+    // Driver para mongoDB
+    implementation 'org.mongodb:mongodb-driver-sync:4.9.1'
+    
+    // Driver para mariaDB
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.1.0'
+	implementation 'org.slf4j:slf4j-simple:1.7.9'
+    
 }
 
 tasks.named('test') {
